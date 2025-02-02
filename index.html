@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+            background: url('https://source.unsplash.com/1600x900/?birthday,celebration') center/cover no-repeat;
+            overflow: hidden;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            text-align: center;
+            background-color: #311432;
+            position: relative;
+        }
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            opacity: 0.8;
+            animation: fall 3s linear infinite;
+            z-index: 0;
+        }
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90vw;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: #AF69EE;
+            border-radius: 20px;
+            z-index: 1;
+        }
+        h1 {
+            font-size: 98%;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            animation: pop 1s infinite alternate;
+        }
+        .message {
+            font-size: 1.5rem;
+            margin-top: 10px;
+            color: #fff9c4;
+            font-style: italic;
+        }
+        .balloon {
+            position: absolute;
+            width: 60px;
+            animation: float 8s ease-in-out infinite;
+            z-index: 0;
+        }
+        .cake {
+            width: 150px;
+            margin-top: 20px;
+            animation: bounce 1.5s infinite;
+        }
+        .play-btn {
+            position: absolute;
+            bottom: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ff4081;
+            border: none;
+            padding: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3);
+            font-size: 2rem;
+            color: white;
+        }
+        .play-btn:hover {
+            transform: translateX(-50%) scale(1.2);
+        }
+        @keyframes float {
+            0% { transform: translateY(100vh) translateX(0px); opacity: 0; }
+            25% { transform: translateY(75vh) translateX(10px); opacity: 1; }
+            50% { transform: translateY(50vh) translateX(-10px); }
+            75% { transform: translateY(25vh) translateX(15px); }
+            100% { transform: translateY(-10vh) translateX(-15px); opacity: 0; }
+        }
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Happy Birthday! Laraib Yazdani</h1>
+        <p class="message">Wishing you a day filled with love, laughter, and cake!</p>
+        <img src="birthday-cake-svgrepo-com.svg" alt="Cake" class="cake">
+        <button class="play-btn" onclick="toggleAudio()">🎶</button>
+        <audio id="birthday-audio" src="LARAIB Happy Birthday Song  Happy Birthday to You.mp3"></audio>
+    </div>
+    
+    <script>
+        function toggleAudio() {
+            let audio = document.getElementById("birthday-audio");
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+        }
+        
+        function createBalloons() {
+            let balloon = document.createElement("img");
+            balloon.src = "balloon-svgrepo-com.svg";
+            balloon.className = "balloon";
+            balloon.style.left = Math.random() * 100 + "vw";
+            balloon.style.animationDuration = (Math.random() * 2 + 6) + "s";
+            document.body.appendChild(balloon);
+            setTimeout(() => balloon.remove(), 50000);
+        }
+        function createConfetti() {
+            for (let i = 0; i < 10; i++) {
+                let confetti = document.createElement("div");
+                confetti.className = "confetti";
+                confetti.style.left = Math.random() * 100 + "vw";
+                confetti.style.top = 0;
+                confetti.style.animationDuration = (Math.random() * 3 + 2) + "s";
+                confetti.style.background = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 5000);
+            }
+        }
+        setInterval(createBalloons, 3000);
+        setInterval(createConfetti, 500);
+    </script>
+</body>
+</html>
